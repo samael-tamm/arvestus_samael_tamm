@@ -26,5 +26,35 @@ namespace arvestus_samael_tamm
         {
             this.InitializeComponent();
         }
+        int loginattempts = 3;
+        private void login_Click(object sender, RoutedEventArgs e)
+        {
+            string username = "user";
+            string password = "SecretPassword";
+
+            if (loginattempts>0)
+            {
+                if(usernamebox.Text==username && passwordbox.Password==password)
+                {
+                    logininfobox.Text = "Logged on!";
+                    this.Frame.Navigate(typeof(Content));
+                    
+                }
+                else
+                {
+                    loginattempts--;
+                    logininfobox.Text = "Login failed. Remaining attempts: " + loginattempts;
+                }
+
+            }
+            
+            if(loginattempts<=0)
+            {
+                login.IsEnabled = false;
+                usernamebox.IsEnabled = false;
+                passwordbox.IsEnabled = false;
+                logininfobox.Text = "No more login attempts";
+            }
+        }
     }
 }
